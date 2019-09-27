@@ -6,7 +6,7 @@ namespace DAL.Repositories.ImplementedRepositories
     {
         public RoleRepository()
         {
-            this.
+            
         }
     }
 }
