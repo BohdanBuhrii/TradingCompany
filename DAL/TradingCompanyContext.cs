@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DAL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAL
 {
@@ -47,12 +48,13 @@ namespace DAL
 
                 entity.HasOne(d => d.CategoryGroup)
                     .WithMany(p => p.Categories)
-                    .HasForeignKey(d => d.CategoryGroupId);
+                    .HasForeignKey(d => d.CategoryGroupId)
+                    .IsRequired();
             });
 
             modelBuilder.Entity<CategoryDiscount>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(cd => new { cd.CategoryId, cd.DiscountId });
 
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.CategoryDiscounts)
@@ -67,7 +69,7 @@ namespace DAL
 
             modelBuilder.Entity<CategoryGroupDiscount>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(d => new { d.CategoryGroupId, d.DiscountId });
 
                 entity.HasOne(d => d.CategoryGroup)
                     .WithMany(p => p.CategoryGroupDiscounts)
@@ -91,7 +93,7 @@ namespace DAL
 
             modelBuilder.Entity<CustomerUser>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(d => new { d.CustomerId, d.UserId });
 
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.CustomerUsers)
@@ -137,7 +139,7 @@ namespace DAL
 
             modelBuilder.Entity<ProductDiscount>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(d => new { d.DiscountId, d.ProductId });
 
                 entity.HasOne(d => d.Discount)
                     .WithMany(p => p.ProductDiscounts)
