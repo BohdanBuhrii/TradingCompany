@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+#Ignore Entity Fraamework Migration
+DAL/Migrations
+
 # User-specific files
 *.suo
 *.user
