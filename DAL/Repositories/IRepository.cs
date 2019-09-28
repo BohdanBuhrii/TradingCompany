@@ -7,7 +7,7 @@ namespace DAL.Repositories
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        Task<TEntity> GetByIdAsync(ulong id);
+        Task<TEntity> GetByIdAsync(int id);
 
         Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate);
 
@@ -15,8 +15,8 @@ namespace DAL.Repositories
 
         Task<TEntity> AddAsync(TEntity entity);
 
-        Task<TEntity> UpdateAsync(TEntity entity);
+        TEntity Update(TEntity entity);
 
-        Task<TEntity> RemoveAsync(TEntity entity);
+        TEntity Remove(TEntity entity);
     }
 }

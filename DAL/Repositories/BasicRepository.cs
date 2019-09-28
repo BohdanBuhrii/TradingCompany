@@ -1,45 +1,52 @@
-﻿using System;
+﻿using DAL.Models.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
-    public class BasicRepository<TEntity> : IRepository<TEntity>
+    public abstract class BasicRepository<TEntity> : IRepository<TEntity>
+        where TEntity : class, IEntity
     {
-        private readonly string _tableName;
+        private readonly DbSet<TEntity> _entities;
 
-        public BasicRepository()
+        public BasicRepository(TradingCompanyContext context)
         {
-
+            _entities = context.Set<TEntity>();
         }
 
-        public BasicRepository(string tableName)
+        public virtual async Task<TEntity> GetByIdAsync(int id)
         {
-            this._tableName = tableName;
+            return await _entities.SingleOrDefaultAsync(e => e.Id == id);
         }
 
-        public TEntity Create(TEntity entity)
+        public virtual async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await _entities.Where(predicate).ToListAsync();
+        }
+
+        public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
+        {
+            return await _entities.ToListAsync();
+        }
+
+        public virtual async Task<TEntity> AddAsync(TEntity entity)
+        {
+            return (await _entities.AddAsync(entity)).Entity;
+        }
+
+        public virtual TEntity Update(TEntity entity)
+        {
+            return _entities.Update(entity).Entity;
+        }
+
+        public virtual TEntity Remove(TEntity entity)
         {
             throw new NotImplementedException();
-        }
-
-        public bool Delete(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TEntity Get(ulong id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<TEntity> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public TEntity Update(TEntity entity)
-        {
-            throw new NotImplementedException();
+            //return _entities.Remove(entity).Entity;
         }
     }
 }
