@@ -2,7 +2,7 @@
 
 namespace DAL.Repositories.Interfaces
 {
-    interface IDiscountRepository : IRepository<Discount>
+    public interface IDiscountRepository : IRepository<Discount>
     {
     }
 }

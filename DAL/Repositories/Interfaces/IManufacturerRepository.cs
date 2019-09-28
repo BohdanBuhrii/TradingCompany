@@ -2,7 +2,7 @@
 
 namespace DAL.Repositories.Interfaces
 {
-    interface IManufacturerRepository : IRepository<Manufacturer>
+    public interface IManufacturerRepository : IRepository<Manufacturer>
     {
     }
 }

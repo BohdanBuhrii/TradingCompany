@@ -2,7 +2,7 @@
 
 namespace DAL.Repositories.Interfaces
 {
-    interface IProductRepository : IRepository<Product>
+    public interface IProductRepository : IRepository<Product>
     {
     }
 }
