@@ -1,17 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
-    public interface IRepository<TEntity>
+    public interface IRepository<TEntity> where TEntity : class
     {
-        TEntity Get(ulong id);
+        Task<TEntity> GetByIdAsync(ulong id);
 
-        IEnumerable<TEntity> GetAll();
+        Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate);
 
-        TEntity Create(TEntity entity);
+        Task<IEnumerable<TEntity>> GetAllAsync();
 
-        TEntity Update(TEntity entity);
+        Task<TEntity> AddAsync(TEntity entity);
 
-        bool Delete(TEntity entity);
+        Task<TEntity> UpdateAsync(TEntity entity);
+
+        Task<TEntity> RemoveAsync(TEntity entity);
     }
 }
