@@ -3,9 +3,9 @@ using DAL.Repositories.Interfaces;
 
 namespace DAL.Repositories.ImplementedRepositories
 {
-    public class RoleRepository : BasicRepository<Role>, IRoleRepository
+    public class DiscountRepository : BasicRepository<Discount>, IDiscountRepository
     {
-        public RoleRepository(TradingCompanyContext context)
+        public DiscountRepository(TradingCompanyContext context)
             :base(context)
         {
 
