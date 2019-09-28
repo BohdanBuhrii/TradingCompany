@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using DAL.Models.Interfaces;
+using System.Collections.Generic;
 
 namespace DAL.Models
 {
-    public class Manufacturer
+    public class Manufacturer : IEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using DAL.Models.Interfaces;
+using System.Collections.Generic;
 
 namespace DAL.Models
 {
-    public  class User
+    public class User : IEntity
     {
         public int Id { get; set; }
         public string Login { get; set; }
