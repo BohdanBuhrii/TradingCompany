@@ -15,8 +15,10 @@ namespace DAL.Repositories
 
         Task<TEntity> AddAsync(TEntity entity);
 
+        TEntity Add(TEntity entity);
+
         TEntity Update(TEntity entity);
 
-        TEntity Remove(TEntity entity);
+        void Remove(TEntity entity);
     }
 }

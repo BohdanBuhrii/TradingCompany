@@ -15,5 +15,7 @@ namespace DAL.UnitOfWork
         public IUserRepository UserRepository { get; }
 
         Task<int> SaveChangesAsync();
+
+        int SaveChanges();
     }
 }

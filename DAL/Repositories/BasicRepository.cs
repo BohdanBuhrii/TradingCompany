@@ -38,15 +38,19 @@ namespace DAL.Repositories
             return (await _entities.AddAsync(entity)).Entity;
         }
 
+        public virtual TEntity Add(TEntity entity)
+        {
+            return _entities.Add(entity).Entity;
+        }
+
         public virtual TEntity Update(TEntity entity)
         {
             return _entities.Update(entity).Entity;
         }
 
-        public virtual TEntity Remove(TEntity entity)
+        public virtual void Remove(TEntity entity)
         {
-            throw new NotImplementedException();
-            //return _entities.Remove(entity).Entity;
+            _entities.Remove(entity);
         }
     }
 }

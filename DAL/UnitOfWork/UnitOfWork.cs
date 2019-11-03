@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using DAL.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Unity.Resolution;
 
 namespace DAL.UnitOfWork
 {
@@ -23,10 +25,10 @@ namespace DAL.UnitOfWork
         private IRoleRepository _roleRepository;
 
         private IUserRepository _userRepository;
-        
-        public UnitOfWork(TradingCompanyContext context)
+
+        public UnitOfWork()
         {
-            _context = context;
+            _context = new TradingCompanyContext();
         }
 
         public ICategoryGroupRepository CategoryGroupRepository
@@ -35,7 +37,8 @@ namespace DAL.UnitOfWork
             {
                 if (_categoryGroupRepository == null)
                 {
-                    _categoryGroupRepository = DependencyInjectorDAL.Resolve<ICategoryGroupRepository>();            
+                    _categoryGroupRepository = DependencyInjectorDAL.
+                        Resolve<ICategoryGroupRepository>(new ParameterOverride("context", _context));            
                 }
 
                 return _categoryGroupRepository;
@@ -48,7 +51,8 @@ namespace DAL.UnitOfWork
             {
                 if (_categoryRepository == null)
                 {
-                    _categoryRepository = DependencyInjectorDAL.Resolve<ICategoryRepository>();
+                    _categoryRepository = DependencyInjectorDAL.
+                        Resolve<ICategoryRepository>(new ParameterOverride("context", _context));
                 }
 
                 return _categoryRepository;
@@ -61,7 +65,8 @@ namespace DAL.UnitOfWork
             {
                 if (_customerRepository == null)
                 {
-                    _customerRepository = DependencyInjectorDAL.Resolve<ICustomerRepository>();
+                    _customerRepository = DependencyInjectorDAL
+                        .Resolve<ICustomerRepository>(new ParameterOverride("context", _context));
                 }
 
                 return _customerRepository;
@@ -74,7 +79,8 @@ namespace DAL.UnitOfWork
             {
                 if (_discountRepository == null)
                 {
-                    _discountRepository = DependencyInjectorDAL.Resolve<IDiscountRepository>();
+                    _discountRepository = DependencyInjectorDAL
+                        .Resolve<IDiscountRepository>(new ParameterOverride("context", _context));
                 }
 
                 return _discountRepository;
@@ -87,14 +93,11 @@ namespace DAL.UnitOfWork
             {
                 if (_manufacturerRepository == null)
                 {
-                    _manufacturerRepository = DependencyInjectorDAL.Resolve<IManufacturerRepository>();
+                    _manufacturerRepository = DependencyInjectorDAL
+                        .Resolve<IManufacturerRepository>(new ParameterOverride("context", _context));
                 }
 
                 return _manufacturerRepository;
-            }
-            private set
-            {
-                _manufacturerRepository = value;
             }
         }
 
@@ -104,7 +107,8 @@ namespace DAL.UnitOfWork
             {
                 if (_productRepository == null)
                 {
-                    _productRepository = DependencyInjectorDAL.Resolve<IProductRepository>();
+                    _productRepository = DependencyInjectorDAL
+                        .Resolve<IProductRepository>(new ParameterOverride("context", _context));
                 }
 
                 return _productRepository;
@@ -117,7 +121,8 @@ namespace DAL.UnitOfWork
             {
                 if (_roleRepository == null)
                 {
-                    _roleRepository = DependencyInjectorDAL.Resolve<IRoleRepository>();
+                    _roleRepository = DependencyInjectorDAL
+                        .Resolve<IRoleRepository>(new ParameterOverride("context", _context));
                 }
 
                 return _roleRepository;
@@ -130,7 +135,8 @@ namespace DAL.UnitOfWork
             {
                 if (_userRepository == null)
                 {
-                    _userRepository = DependencyInjectorDAL.Resolve<IUserRepository>();
+                    _userRepository = DependencyInjectorDAL
+                        .Resolve<IUserRepository>(new ParameterOverride("context", _context));
                 }
 
                 return _userRepository;
@@ -140,6 +146,10 @@ namespace DAL.UnitOfWork
         public async Task<int> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync();
+        }
+        public int SaveChanges()
+        {
+            return _context.SaveChanges();
         }
     }
 }
