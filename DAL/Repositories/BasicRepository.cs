@@ -12,6 +12,13 @@ namespace DAL.Repositories
         where TEntity : class, IEntity
     {
         private readonly DbSet<TEntity> _entities;
+        protected virtual IQueryable<TEntity> ConnectedEntities 
+        { 
+            get 
+            { 
+                return _entities;
+            }
+        }
 
         public BasicRepository(TradingCompanyContext context)
         {
@@ -20,17 +27,17 @@ namespace DAL.Repositories
 
         public virtual async Task<TEntity> GetByIdAsync(int id)
         {
-            return await _entities.SingleOrDefaultAsync(e => e.Id == id);
+            return await ConnectedEntities.SingleOrDefaultAsync(e => e.Id == id);
         }
 
         public virtual async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await _entities.Where(predicate).ToListAsync();
+            return await ConnectedEntities.Where(predicate).ToListAsync();
         }
 
         public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            return await _entities.ToListAsync();
+            return await ConnectedEntities.ToListAsync();
         }
 
         public virtual async Task<TEntity> AddAsync(TEntity entity)

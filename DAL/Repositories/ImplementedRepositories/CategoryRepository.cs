@@ -1,5 +1,7 @@
 ﻿using DAL.Models;
 using DAL.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace DAL.Repositories.ImplementedRepositories
 {
@@ -9,6 +11,15 @@ namespace DAL.Repositories.ImplementedRepositories
             : base(context)
         {
 
+        }
+
+        protected override IQueryable<Category> ConnectedEntities
+        {
+            get
+            {
+                return base.ConnectedEntities
+                    .Include(c => c.CategoryGroup);
+            }
         }
     }
 }
