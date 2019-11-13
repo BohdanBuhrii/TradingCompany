@@ -20,7 +20,7 @@ namespace BLL.Services.ImplementedServices
         public async Task<bool> CheckCredentials(CredentialsDTO credentials)
         {
             return (await _unitOfWork.UserRepository
-                .GetAsync(u => u.Login == credentials.Login))
+                .GetAsync(u => u.Login == credentials.Email))
                 .Any(u => u.PasswordHash == Hash(credentials.Password));
         }
 
