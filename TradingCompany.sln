@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "ConsoleApp\Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradingCompanyForms", "TradingCompanyForms\TradingCompanyForms.csproj", "{2EB2866D-2E97-49B5-9DF2-B4123813BEDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{9427B2D6-2690-46E6-ABF5-06048CA4BB77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "BLL\BLL.csproj", "{9427B2D6-2690-46E6-ABF5-06048CA4BB77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{4D39F610-2A79-4EF1-A0BC-505282A94233}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTO", "DTO\DTO.csproj", "{4D39F610-2A79-4EF1-A0BC-505282A94233}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingCompanyXUnitTests", "TradingCompanyXUnitTests\TradingCompanyXUnitTests.csproj", "{202BA2D3-A50A-4CD7-B36F-9DE06C2C89AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{4D39F610-2A79-4EF1-A0BC-505282A94233}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D39F610-2A79-4EF1-A0BC-505282A94233}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D39F610-2A79-4EF1-A0BC-505282A94233}.Release|Any CPU.Build.0 = Release|Any CPU
+		{202BA2D3-A50A-4CD7-B36F-9DE06C2C89AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{202BA2D3-A50A-4CD7-B36F-9DE06C2C89AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{202BA2D3-A50A-4CD7-B36F-9DE06C2C89AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{202BA2D3-A50A-4CD7-B36F-9DE06C2C89AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
