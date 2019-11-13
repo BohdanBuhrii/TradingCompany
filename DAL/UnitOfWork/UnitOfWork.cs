@@ -31,6 +31,11 @@ namespace DAL.UnitOfWork
             _context = new TradingCompanyContext();
         }
 
+        public UnitOfWork(TradingCompanyContext context)
+        {
+            _context = context;
+        }
+
         public ICategoryGroupRepository CategoryGroupRepository
         {
             get
