@@ -1,24 +1,44 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
 using BLL.Services.Interfaces;
+using DAL.Models;
+using DAL.UnitOfWork;
 using DTO;
 
 namespace BLL.Services.ImplementedServices
 {
     public class UserService : IUserService
     {
-        public Task<UserDTO> CreateUser(UserDTO user)
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
+
+        public UserService(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            throw new System.NotImplementedException();
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
-        public Task<UserDTO> GetUserByEmail(string userEmail)
+        public async Task<UserDTO> CreateUser(UserDTO user)
         {
-            throw new System.NotImplementedException();
+            return _mapper.Map<UserDTO>((
+                await _unitOfWork.UserRepository
+                .AddAsync(_mapper.Map<User>(user))));
         }
 
-        public Task<UserDTO> GetUserById(int userId)
+        public async Task<UserDTO> GetUserByEmail(string userEmail)
         {
-            throw new System.NotImplementedException();
+            return _mapper.Map<UserDTO>((
+                await _unitOfWork.UserRepository
+                .GetAsync(u => u.Email == userEmail))
+                .FirstOrDefault());
+        }
+
+        public async Task<UserDTO> GetUserById(int userId)
+        {
+            return _mapper.Map<UserDTO>((
+                await _unitOfWork.UserRepository
+                .GetByIdAsync(userId)));
         }
 
         public Task RemoveUser()

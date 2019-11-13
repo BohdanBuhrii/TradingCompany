@@ -1,7 +1,6 @@
 ﻿using BLL.Services.Interfaces;
 using DAL.UnitOfWork;
 using DTO;
-using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -25,10 +24,10 @@ namespace BLL.Services.ImplementedServices
                 .Any(u => u.PasswordHash == Hash(credentials.Password));
         }
 
-        public async Task<bool> UserExist(string login)
+        public async Task<bool> UserExist(string email)
         {
             return (await _unitOfWork.UserRepository
-                .GetAsync(u => u.Login == login))
+                .GetAsync(u => u.Email == email))
                 .Any();
         }
 
