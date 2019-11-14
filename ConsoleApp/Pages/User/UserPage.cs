@@ -2,6 +2,8 @@
 using DAL.Models;
 using DAL.UnitOfWork;
 using System;
+using System.Security.Cryptography;
+using System.Text;
 using TradingCompany.ConsoleApp.Converter;
 using TradingCompany.ConsoleApp.Core;
 
@@ -36,7 +38,7 @@ namespace TradingCompany.ConsoleApp.Pages
                 user.Email = Console.ReadLine();
 
                 Console.WriteLine("Password:");
-                user.PasswordHash = Console.ReadLine();
+                user.PasswordHash = Hash(Console.ReadLine());
 
                 Console.WriteLine("Role:");
                 user.RoleId = Convert.ToInt32(Console.ReadLine());
@@ -80,6 +82,19 @@ namespace TradingCompany.ConsoleApp.Pages
         {
             var userPage = new UsersPage();
             userPage.Init();
+        }
+
+        public string Hash(string str)
+        {
+            var hasher = MD5.Create();
+            var hash = hasher.ComputeHash(Encoding.UTF8.GetBytes(str));
+            var output = string.Empty;
+            foreach (var b in hash)
+            {
+                output += b.ToString("X2");
+            }
+
+            return output;
         }
     }
 }
