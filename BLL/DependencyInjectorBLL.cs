@@ -3,6 +3,7 @@ using Unity.Resolution;
 using BLL.Services.Interfaces;
 using BLL.Services.ImplementedServices;
 using DAL;
+using AutoMapper;
 
 namespace BLL
 {
@@ -23,7 +24,8 @@ namespace BLL
         {
             container
                 .RegisterType<IAuthenticationService, AuthenticationService>()
-                .RegisterType<IUserService, UserService>();
+                .RegisterType<IUserService, UserService>()
+                .RegisterInstance<IMapper>(MapperConfig.CreateMapper(),InstanceLifetime.Singleton); ;
         }
 
         public static T Resolve<T>(params ParameterOverride[] overrides)

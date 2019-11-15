@@ -1,7 +1,9 @@
 ﻿using DAL.Repositories.ImplementedRepositories;
 using DAL.Repositories.Interfaces;
 using DAL.UnitOfWork;
+using Microsoft.EntityFrameworkCore;
 using Unity;
+using Unity.Lifetime;
 using Unity.Resolution;
 
 namespace DAL
@@ -29,7 +31,8 @@ namespace DAL
                 .RegisterType<IProductRepository, ProductRepository>()
                 .RegisterType<IRoleRepository, RoleRepository>()
                 .RegisterType<IUserRepository, UserRepository>()
-                .RegisterType<IUnitOfWork, UnitOfWork.UnitOfWork>();
+                .RegisterType<IUnitOfWork, UnitOfWork.UnitOfWork>()
+                .RegisterType<TradingCompanyContext>(new PerThreadLifetimeManager());
         }
 
         public static T Resolve<T>(params ParameterOverride[] overrides)
