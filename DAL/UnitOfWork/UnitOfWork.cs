@@ -26,11 +26,6 @@ namespace DAL.UnitOfWork
 
         private IUserRepository _userRepository;
 
-        public UnitOfWork()
-        {
-            _context = new TradingCompanyContext();
-        }
-
         public UnitOfWork(TradingCompanyContext context)
         {
             _context = context;

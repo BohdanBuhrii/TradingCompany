@@ -9,7 +9,7 @@ namespace DAL.Repositories
     {
         Task<TEntity> GetByIdAsync(int id);
 
-        Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate, int skip = 0, int take = int.MaxValue);
 
         Task<IEnumerable<TEntity>> GetAllAsync();
 

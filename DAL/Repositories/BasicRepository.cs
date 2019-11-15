@@ -30,9 +30,10 @@ namespace DAL.Repositories
             return await ConnectedEntities.SingleOrDefaultAsync(e => e.Id == id);
         }
 
-        public virtual async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate)
+        public virtual async Task<IEnumerable<TEntity>> GetAsync(
+            Expression<Func<TEntity, bool>> predicate, int skip = 0, int take = int.MaxValue)
         {
-            return await ConnectedEntities.Where(predicate).ToListAsync();
+            return await ConnectedEntities.Where(predicate).Skip(skip).Take(take).ToListAsync();
         }
 
         public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
