@@ -46,6 +46,22 @@ namespace DAL.Repositories
             return (await _entities.AddAsync(entity)).Entity;
         }
 
+        public virtual TEntity GetById(int id)
+        {
+            return ConnectedEntities.SingleOrDefault(e => e.Id == id);
+        }
+
+        public virtual IEnumerable<TEntity> Get(
+            Expression<Func<TEntity, bool>> predicate, int skip = 0, int take = int.MaxValue)
+        {
+            return ConnectedEntities.Where(predicate).Skip(skip).Take(take).ToList();
+        }
+
+        public virtual IEnumerable<TEntity> GetAll()
+        {
+            return ConnectedEntities.ToList();
+        }
+
         public virtual TEntity Add(TEntity entity)
         {
             return _entities.Add(entity).Entity;

@@ -15,6 +15,13 @@ namespace DAL.Repositories
 
         Task<TEntity> AddAsync(TEntity entity);
 
+        TEntity GetById(int id);
+
+        IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> predicate, int skip = 0, int take = int.MaxValue);
+
+        IEnumerable<TEntity> GetAll();
+
+
         TEntity Add(TEntity entity);
 
         TEntity Update(TEntity entity);
