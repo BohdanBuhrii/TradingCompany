@@ -19,7 +19,7 @@ namespace BLL.Services.ImplementedServices
             _mapper = mapper;
         }
 
-        public async Task<UserDTO> CreateUser(UserDTO user)
+        public async Task<UserDTO> AddUser(UserDTO user)
         {
             return _mapper.Map<UserDTO>((
                 await _unitOfWork.UserRepository

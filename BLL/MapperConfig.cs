@@ -10,10 +10,20 @@ namespace BLL
         {
             return new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<User, UserDTO>();
+                cfg.CreateMap<User, UserDTO>()
+                    .ReverseMap();
+
                 cfg.CreateMap<Role, RoleDTO>();
                 cfg.CreateMap<RoleDTO, Role>()
                     .ForMember(r => r.Users, opt => opt.Ignore());
+
+                cfg.CreateMap<Category, CategoryDTO>();
+                cfg.CreateMap<CategoryDTO, Category>()
+                    .ForMember(c => c.CategoryDiscounts, opt => opt.Ignore())
+                    .ForMember(c => c.Products, opt => opt.Ignore());
+
+                cfg.CreateMap<CategoryGroup, CategoryGroupDTO>();
+                cfg.CreateMap<CategoryGroupDTO, CategoryGroup>();
             }).CreateMapper();
         }
     }

@@ -10,19 +10,19 @@ namespace TradingCompany.ConsoleApp.Pages
     public class CategoryGroupsPage : ListView
     {
         private readonly IUnitOfWork _unitOfWork;
-        private IEnumerable<Category> categories;
+        private IEnumerable<CategoryGroup> categoryGroups;
 
         public CategoryGroupsPage()
         {
             _unitOfWork = DependencyInjectorDAL.Resolve<IUnitOfWork>();
-            categories = _unitOfWork.CategoryRepository.GetAllAsync().Result;
+            categoryGroups = _unitOfWork.CategoryGroupRepository.GetAllAsync().Result;
 
-            foreach (var category in categories)
+            foreach (var group in categoryGroups)
             {
                 buttons.Add(new Button
                 {
-                    Text = ToString(category),
-                    Entity = category,
+                    Text = ToString(group),
+                    Entity = group,
                     ButtonAction = ShowEntity,
                     AbilityToChange = false,
                     BackgroundColor = ConsoleColor.DarkYellow
@@ -46,9 +46,9 @@ namespace TradingCompany.ConsoleApp.Pages
             });
         }
 
-        public string ToString(Category category) 
+        public string ToString(CategoryGroup categoryGroup) 
         {
-            return category.Name;
+            return categoryGroup.Name;
         }
 
         public void BackToTablesPage()
@@ -63,19 +63,16 @@ namespace TradingCompany.ConsoleApp.Pages
 
             ShowMessage("Creating new entity");
 
-            var category = new Category();
+            var categoryGroup = new CategoryGroup();
             try
             {
                 Console.WriteLine("Name:");
-                category.Name = Console.ReadLine();
+                categoryGroup.Name = Console.ReadLine();
 
                 Console.WriteLine("IsActive:");
-                category.IsActive = Convert.ToBoolean(Console.ReadLine());
+                categoryGroup.IsActive = Convert.ToBoolean(Console.ReadLine());
 
-                Console.WriteLine("CategoryGroupId:");
-                category.CategoryGroupId = Convert.ToInt32(Console.ReadLine());
-
-                _unitOfWork.CategoryRepository.Add(category);
+                _unitOfWork.CategoryGroupRepository.Add(categoryGroup);
                 _unitOfWork.SaveChanges();
                 ShowSuccessMessage("Entity created successfully");
             }

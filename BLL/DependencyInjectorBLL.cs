@@ -25,6 +25,7 @@ namespace BLL
             container
                 .RegisterType<IAuthenticationService, AuthenticationService>()
                 .RegisterType<IUserService, UserService>()
+                .RegisterType<ICategoryService, CategoryService>()
                 .RegisterInstance<IMapper>(MapperConfig.CreateMapper(),InstanceLifetime.Singleton); ;
         }
 

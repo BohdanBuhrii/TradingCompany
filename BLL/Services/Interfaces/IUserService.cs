@@ -9,7 +9,7 @@ namespace BLL.Services.Interfaces
 
         Task<UserDTO> GetUserByEmail(string userEmail);
 
-        Task<UserDTO> CreateUser(UserDTO user);
+        Task<UserDTO> AddUser(UserDTO user);
 
         Task<UserDTO> UpdateUser(UserDTO user);
 

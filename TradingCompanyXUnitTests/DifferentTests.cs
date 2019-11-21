@@ -1,4 +1,5 @@
 using AutoMapper;
+using BLL;
 using DAL;
 using DAL.Models;
 using DAL.UnitOfWork;
@@ -10,6 +11,20 @@ namespace TradingCompanyXUnitTests
 {
     public class DifferentTests
     {
+        [Fact]
+        public void Check_Mapper()
+        {
+            //Arrange
+            var mapper = DependencyInjectorBLL.Resolve<IMapper>();
+            var category = new Category { Id = 1, Name = "uuu", IsActive = true };
+
+            //Act
+            var categoryDTO = mapper.Map<CategoryDTO>(category);
+
+            //Assert
+            Assert.NotNull(categoryDTO);
+        }
+
         [Fact]
         public void Repository_Can_Add_And_Get_Entities()
         {
