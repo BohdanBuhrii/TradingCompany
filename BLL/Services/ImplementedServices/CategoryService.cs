@@ -42,5 +42,17 @@ namespace BLL.Services.ImplementedServices
 
             return categoryGroupDTOs;
         }
+
+        public IList<CategoryDTO> GetAllCategories()
+        {
+            var categories = _unitOfWork.CategoryRepository.GetAll();
+            var categoryDTOs = new List<CategoryDTO>();
+            foreach (var category in categories)
+            {
+                categoryDTOs.Add(_mapper.Map<CategoryDTO>(category));
+            }
+
+            return categoryDTOs;
+        }
     }
 }

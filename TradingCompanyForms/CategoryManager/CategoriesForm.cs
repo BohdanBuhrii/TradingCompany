@@ -35,14 +35,23 @@ namespace TradingCompanyForms.CategoryManager
         private void GroupsGV_CellClick(object sender, System.EventArgs e)
         {
             this.CategoriesGV.DataSource =
-                _categoryService.GetCategoriesByGroupId((int)this.GroupsGV.CurrentRow.Cells["Id"].Value);
+                _categoryService.GetCategoriesByGroupId(
+                    (int)this.GroupsGV.CurrentRow.Cells["Id"].Value
+                );
         }
-        //private void GroupsGV_SelectionChanged(object sender, System.EventArgs e)
-        //{
 
-        //    var i = this.GroupsGV.SelectedRows[0].Index;
+        private void AddCategoryGroupBtn_Click(object sender, System.EventArgs e)
+        {
+            var form = new AddCategoryGroupForm();
+            form.FormClosing += new FormClosingEventHandler(this.UpdateData);
+            
+            form.Show();
+        }
 
-        //}
-
+        public void UpdateData(object sender, FormClosingEventArgs e) 
+        {
+            this.GroupsGV.DataSource = _categoryService.GetAllCategoryGroups();
+            this.Refresh();
+        }
     }
 }

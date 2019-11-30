@@ -31,6 +31,8 @@
             this.EmailTB = new System.Windows.Forms.TextBox();
             this.PasswordTB = new System.Windows.Forms.TextBox();
             this.LogInBtn = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             // 
             // EmailTB
             // 
@@ -58,14 +60,34 @@
             this.LogInBtn.UseVisualStyleBackColor = true;
             this.LogInBtn.Click += new System.EventHandler(this.LogInBtn_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(198, 106);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(40, 15);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Login:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(198, 155);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(39, 15);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Email:";
+            // 
             // AuthenticationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.LogInBtn);
             this.Controls.Add(this.PasswordTB);
             this.Controls.Add(this.EmailTB);
+            this.Controls.Add(this.label2);
             this.Name = "AuthenticationForm";
             this.Text = "AuthenticationForm";
 
@@ -76,5 +98,7 @@
         private System.Windows.Forms.TextBox EmailTB;
         private System.Windows.Forms.TextBox PasswordTB;
         private System.Windows.Forms.Button LogInBtn;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }

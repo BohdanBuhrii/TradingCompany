@@ -12,5 +12,6 @@ namespace BLL.Services.Interfaces
 
         IList<CategoryGroupDTO> GetAllCategoryGroups();
 
+        IList<CategoryDTO> GetAllCategories();
     }
 }

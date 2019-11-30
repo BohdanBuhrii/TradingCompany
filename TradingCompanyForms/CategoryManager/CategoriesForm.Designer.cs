@@ -30,7 +30,54 @@
         {
             this.LogOutBtn = new System.Windows.Forms.Button();
             this.LoginLbl = new System.Windows.Forms.Label();
+            this.AddCategoryGroupBtn = new System.Windows.Forms.Button();
+            // 
+            // LogOutBtn
+            // 
+            this.LogOutBtn.Location = new System.Drawing.Point(728, 3);
+            this.LogOutBtn.Name = "LogOutBtn";
+            this.LogOutBtn.Size = new System.Drawing.Size(67, 28);
+            this.LogOutBtn.TabIndex = 0;
+            this.LogOutBtn.Text = "Log out";
+            this.LogOutBtn.UseVisualStyleBackColor = true;
+            this.LogOutBtn.Click += new System.EventHandler(this.LogOutBtn_Click);
+            // 
+            // LoginLbl
+            // 
+            this.LoginLbl.AutoSize = true;
+            this.LoginLbl.Location = new System.Drawing.Point(663, 10);
+            this.LoginLbl.Name = "LoginLbl";
+            this.LoginLbl.Size = new System.Drawing.Size(37, 15);
+            this.LoginLbl.TabIndex = 1;
+            this.LoginLbl.Text = "Login";
+            // 
+            // AddCategoryGroupBtn
+            // 
+            this.AddCategoryGroupBtn.Location = new System.Drawing.Point(15, 89);
+            this.AddCategoryGroupBtn.Name = "AddCategoryGroupBtn";
+            this.AddCategoryGroupBtn.Size = new System.Drawing.Size(128, 30);
+            this.AddCategoryGroupBtn.TabIndex = 2;
+            this.AddCategoryGroupBtn.Text = "Add category group";
+            this.AddCategoryGroupBtn.UseVisualStyleBackColor = true;
+            this.AddCategoryGroupBtn.Click += new System.EventHandler(this.AddCategoryGroupBtn_Click);
+            // 
+            // CategoriesForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.AddCategoryGroupBtn);
+            this.Controls.Add(this.LoginLbl);
+            this.Controls.Add(this.LogOutBtn);
+            this.Name = "CategoriesForm";
+            this.Text = "CategoriesForm";
+            InitializeNotGeneratedComponents();
+        }
+        #endregion
 
+
+        private void InitializeNotGeneratedComponents()
+        {
             System.Windows.Forms.DataGridViewCellStyle FirstCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle SecondCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle ThirdCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
@@ -61,25 +108,6 @@
             ThirdCellStyle.SelectionBackColor = System.Drawing.Color.DarkTurquoise;
             ThirdCellStyle.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
             ThirdCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // LogOutBtn
-            // 
-            this.LogOutBtn.Location = new System.Drawing.Point(728, 3);
-            this.LogOutBtn.Name = "LogOutBtn";
-            this.LogOutBtn.Size = new System.Drawing.Size(67, 28);
-            this.LogOutBtn.TabIndex = 0;
-            this.LogOutBtn.Text = "Log out";
-            this.LogOutBtn.UseVisualStyleBackColor = true;
-            this.LogOutBtn.Click += new System.EventHandler(this.LogOutBtn_Click);
-            // 
-            // LoginLbl
-            // 
-            this.LoginLbl.AutoSize = true;
-            this.LoginLbl.Location = new System.Drawing.Point(663, 10);
-            this.LoginLbl.Name = "LoginLbl";
-            this.LoginLbl.Size = new System.Drawing.Size(37, 15);
-            this.LoginLbl.TabIndex = 1;
-            this.LoginLbl.Text = "Login";
             // 
             // CategoriesGV
             // 
@@ -138,7 +166,7 @@
             this.GroupsGV.Size = new System.Drawing.Size(187, 389);
             this.GroupsGV.TabIndex = 3;
             this.GroupsGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GroupsGV_CellClick);
-            
+
             // 
             // CNameColumn
             // 
@@ -155,22 +183,11 @@
             this.GIsActiveColumn.Name = "IsActiveColumn";
             this.GIsActiveColumn.ReadOnly = true;
             this.GIsActiveColumn.Width = 45;
-            // 
-            // CategoriesForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.LoginLbl);
-            this.Controls.Add(this.LogOutBtn);
+
+
             this.Controls.Add(this.CategoriesGV);
             this.Controls.Add(this.GroupsGV);
-
-            this.Name = "CategoriesForm";
-            this.Text = "CategoriesForm";
         }
-
-        #endregion
 
         private System.Windows.Forms.Button LogOutBtn;
         private System.Windows.Forms.Label LoginLbl;
@@ -180,6 +197,6 @@
         private System.Windows.Forms.DataGridView GroupsGV;
         private System.Windows.Forms.DataGridViewTextBoxColumn GNameColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn GIsActiveColumn;
-
+        private System.Windows.Forms.Button AddCategoryGroupBtn;
     }
 }
