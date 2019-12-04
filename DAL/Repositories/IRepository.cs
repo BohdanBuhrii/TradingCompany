@@ -26,6 +26,6 @@ namespace DAL.Repositories
 
         TEntity Update(TEntity entity);
 
-        void Remove(TEntity entity);
+        void Remove(int id);
     }
 }

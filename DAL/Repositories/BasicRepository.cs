@@ -72,9 +72,9 @@ namespace DAL.Repositories
             return _entities.Update(entity).Entity;
         }
 
-        public virtual void Remove(TEntity entity)
+        public virtual void Remove(int id)
         {
-            _entities.Remove(entity);
+            _entities.Remove(GetById(id));
         }
     }
 }
