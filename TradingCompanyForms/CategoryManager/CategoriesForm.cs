@@ -53,5 +53,21 @@ namespace TradingCompanyForms.CategoryManager
             this.GroupsGV.DataSource = _categoryService.GetAllCategoryGroups();
             this.Refresh();
         }
+
+        private void AddCategoryBtn_Click(object sender, System.EventArgs e)
+        {
+            var form = new AddCategoryForm();
+            form.FormClosing += new FormClosingEventHandler(this.UpdateData);
+
+            form.Show();
+        }
+
+        private void SaveChangesBtn_Click(object sender, System.EventArgs e)
+        {
+            _categoryService.UpdateCategories(
+                (IEnumerable<CategoryDTO>)this.CategoriesGV.DataSource);
+            _categoryService.UpdateCategoryGroups(
+                (IEnumerable<CategoryGroupDTO>)this.GroupsGV.DataSource);
+        }
     }
 }

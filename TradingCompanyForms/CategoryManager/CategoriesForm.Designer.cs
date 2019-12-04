@@ -31,6 +31,8 @@
             this.LogOutBtn = new System.Windows.Forms.Button();
             this.LoginLbl = new System.Windows.Forms.Label();
             this.AddCategoryGroupBtn = new System.Windows.Forms.Button();
+            this.AddCategoryBtn = new System.Windows.Forms.Button();
+            this.SaveChangesBtn = new System.Windows.Forms.Button();
             // 
             // LogOutBtn
             // 
@@ -61,11 +63,33 @@
             this.AddCategoryGroupBtn.UseVisualStyleBackColor = true;
             this.AddCategoryGroupBtn.Click += new System.EventHandler(this.AddCategoryGroupBtn_Click);
             // 
+            // AddCategoryBtn
+            // 
+            this.AddCategoryBtn.Location = new System.Drawing.Point(15, 140);
+            this.AddCategoryBtn.Name = "AddCategoryBtn";
+            this.AddCategoryBtn.Size = new System.Drawing.Size(127, 27);
+            this.AddCategoryBtn.TabIndex = 3;
+            this.AddCategoryBtn.Text = "Add category";
+            this.AddCategoryBtn.UseVisualStyleBackColor = true;
+            this.AddCategoryBtn.Click += new System.EventHandler(this.AddCategoryBtn_Click);
+            // 
+            // SaveChangesBtn
+            // 
+            this.SaveChangesBtn.Location = new System.Drawing.Point(15, 307);
+            this.SaveChangesBtn.Name = "SaveChangesBtn";
+            this.SaveChangesBtn.Size = new System.Drawing.Size(127, 27);
+            this.SaveChangesBtn.TabIndex = 4;
+            this.SaveChangesBtn.Text = "Save changes";
+            this.SaveChangesBtn.UseVisualStyleBackColor = true;
+            this.SaveChangesBtn.Click += new System.EventHandler(this.SaveChangesBtn_Click);
+            // 
             // CategoriesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.SaveChangesBtn);
+            this.Controls.Add(this.AddCategoryBtn);
             this.Controls.Add(this.AddCategoryGroupBtn);
             this.Controls.Add(this.LoginLbl);
             this.Controls.Add(this.LogOutBtn);
@@ -88,6 +112,7 @@
             this.CIsActiveColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 
             this.GroupsGV = new System.Windows.Forms.DataGridView();
+            this.GIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GIsActiveColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             //
@@ -128,6 +153,7 @@
             this.CategoriesGV.Name = "CategoriesGV";
             this.CategoriesGV.Size = new System.Drawing.Size(187, 389);
             this.CategoriesGV.TabIndex = 2;
+            this.CategoriesGV.AutoGenerateColumns = false;
             //this.CategoriesGV.SelectionChanged += new System.EventHandler(this.GroupsGV_SelectionChanged);
             // 
             // CNameColumn
@@ -135,15 +161,16 @@
             this.CNameColumn.DataPropertyName = "Name";
             this.CNameColumn.HeaderText = "Name";
             this.CNameColumn.MaxInputLength = 50;
-            this.CNameColumn.Name = "NameColumn";
-            this.CNameColumn.ReadOnly = true;
+            this.CNameColumn.Name = "Name";
+            this.CNameColumn.ReadOnly = false;
+            this.CNameColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // CIsActiveColumn
             // 
             this.CIsActiveColumn.DataPropertyName = "IsActive";
             this.CIsActiveColumn.HeaderText = "Active";
-            this.CIsActiveColumn.Name = "IsActiveColumn";
-            this.CIsActiveColumn.ReadOnly = true;
+            this.CIsActiveColumn.Name = "IsActive";
+            this.CIsActiveColumn.ReadOnly = false;
             this.CIsActiveColumn.Width = 45;
             // 
             // GroupsGV
@@ -157,6 +184,7 @@
             this.GroupsGV.ColumnHeadersDefaultCellStyle = SecondCellStyle;
             this.GroupsGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GroupsGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.GIdColumn,
             this.GNameColumn,
             this.GIsActiveColumn});
             this.GroupsGV.DefaultCellStyle = ThirdCellStyle;
@@ -166,22 +194,30 @@
             this.GroupsGV.Size = new System.Drawing.Size(187, 389);
             this.GroupsGV.TabIndex = 3;
             this.GroupsGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GroupsGV_CellClick);
-
+            this.GroupsGV.AutoGenerateColumns = false;
+            //
+            // GIdColumn
+            //
+            this.GIdColumn.DataPropertyName = "Id";
+            this.GIdColumn.Name = "Id";
+            this.GIdColumn.ReadOnly = true;
+            this.GIdColumn.Visible = false;
             // 
             // CNameColumn
             // 
             this.GNameColumn.DataPropertyName = "Name";
             this.GNameColumn.HeaderText = "Name";
             this.GNameColumn.MaxInputLength = 50;
-            this.GNameColumn.Name = "NameColumn";
-            this.GNameColumn.ReadOnly = true;
+            this.GNameColumn.Name = "Name";
+            this.GNameColumn.ReadOnly = false;
+            this.GNameColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // CIsActiveColumn
             // 
             this.GIsActiveColumn.DataPropertyName = "IsActive";
             this.GIsActiveColumn.HeaderText = "Active";
             this.GIsActiveColumn.Name = "IsActiveColumn";
-            this.GIsActiveColumn.ReadOnly = true;
+            this.GIsActiveColumn.ReadOnly = false;
             this.GIsActiveColumn.Width = 45;
 
 
@@ -195,8 +231,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CNameColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn CIsActiveColumn;
         private System.Windows.Forms.DataGridView GroupsGV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GIdColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn GNameColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn GIsActiveColumn;
         private System.Windows.Forms.Button AddCategoryGroupBtn;
+        private System.Windows.Forms.Button AddCategoryBtn;
+        private System.Windows.Forms.Button SaveChangesBtn;
     }
 }

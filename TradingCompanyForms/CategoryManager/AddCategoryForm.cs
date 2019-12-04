@@ -2,19 +2,25 @@
 using BLL.Services.Interfaces;
 using DTO;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace TradingCompanyForms.CategoryManager
 {
-    public partial class AddCategoryGroupForm : Form
+    public partial class AddCategoryForm : Form
     {
         private readonly ICategoryService _categoryService;
 
-        public AddCategoryGroupForm()
+        public AddCategoryForm()
         {
             _categoryService = DependencyInjectorBLL.Resolve<ICategoryService>();
-
+            
             InitializeComponent();
+
+            GroupCB.Items.AddRange(
+                _categoryService.GetAllCategoryGroups()
+                .Select(g => g.Name).ToArray()
+            );
         }
 
         private void CancelBtn_Click(object sender, EventArgs e)
@@ -26,10 +32,13 @@ namespace TradingCompanyForms.CategoryManager
         {
             SaveBtn.Enabled = false;
 
-            _categoryService.AddCategoryGroup(new CategoryGroupDTO {
+            _categoryService.AddCategory(new CategoryDTO
+            {
                 Name = NameTB.Text,
-                IsActive = IsActiveCB.Checked
+                IsActive = IsActiveCB.Checked,
+                CategoryGroup = _categoryService.GetGroupByName(GroupCB.SelectedItem.ToString())
             });
+
 
             this.Close();
         }
@@ -43,9 +52,22 @@ namespace TradingCompanyForms.CategoryManager
             }
             else
             {
-                SaveBtn.Enabled = true;
+                if (GroupCB.SelectedItem?.ToString().Length > 0)
+                {
+                    SaveBtn.Enabled = true;
+                }
+
                 AlertLable.Visible = false;
+            }
+        }
+
+        private void GroupCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (NameTB.Text.Length > 0)
+            { 
+                SaveBtn.Enabled = true;
             }
         }
     }
 }
+

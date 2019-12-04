@@ -19,8 +19,11 @@ namespace BLL
 
                 cfg.CreateMap<Category, CategoryDTO>();
                 cfg.CreateMap<CategoryDTO, Category>()
+                    .ForMember(c => c.CategoryGroupId,
+                               opt => opt.MapFrom(cDTO => cDTO.CategoryGroup.Id))
                     .ForMember(c => c.CategoryDiscounts, opt => opt.Ignore())
-                    .ForMember(c => c.Products, opt => opt.Ignore());
+                    .ForMember(c => c.Products, opt => opt.Ignore())
+                    .ForMember(c => c.CategoryGroup, opt => opt.Ignore());
 
                 cfg.CreateMap<CategoryGroup, CategoryGroupDTO>();
                 cfg.CreateMap<CategoryGroupDTO, CategoryGroup>();
