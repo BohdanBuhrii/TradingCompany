@@ -31,5 +31,7 @@ namespace BLL.Services.Interfaces
         void UpdateCategories(IEnumerable<CategoryDTO> categories);
 
         void UpdateCategoryGroups(IEnumerable<CategoryGroupDTO> groups);
+
+        IEnumerable<CategoryGroupDTO> FilterGroups(string filter);
     }
 }

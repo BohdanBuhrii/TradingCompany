@@ -68,8 +68,8 @@ namespace TradingCompanyXUnitTests
         [Fact]
         public void Some_Test()
         {
-            var context = new TradingCompanyContext();
-            
+            var a = "jkjl";
+            Assert.True(a.Contains(""));
         }
     }
 }

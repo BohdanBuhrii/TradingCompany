@@ -33,6 +33,9 @@
             this.AddCategoryGroupBtn = new System.Windows.Forms.Button();
             this.AddCategoryBtn = new System.Windows.Forms.Button();
             this.SaveChangesBtn = new System.Windows.Forms.Button();
+            this.NoCategoriesLbl = new System.Windows.Forms.Label();
+            this.GroupSearchTB = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             // 
             // LogOutBtn
             // 
@@ -83,11 +86,40 @@
             this.SaveChangesBtn.UseVisualStyleBackColor = true;
             this.SaveChangesBtn.Click += new System.EventHandler(this.SaveChangesBtn_Click);
             // 
+            // NoCategoriesLbl
+            // 
+            this.NoCategoriesLbl.AutoSize = true;
+            this.NoCategoriesLbl.Location = new System.Drawing.Point(437, 89);
+            this.NoCategoriesLbl.Name = "NoCategoriesLbl";
+            this.NoCategoriesLbl.Size = new System.Drawing.Size(155, 15);
+            this.NoCategoriesLbl.TabIndex = 5;
+            this.NoCategoriesLbl.Text = "No categories for this group";
+            // 
+            // GroupSearchTB
+            // 
+            this.GroupSearchTB.Location = new System.Drawing.Point(15, 28);
+            this.GroupSearchTB.Name = "GroupSearchTB";
+            this.GroupSearchTB.Size = new System.Drawing.Size(127, 23);
+            this.GroupSearchTB.TabIndex = 6;
+            this.GroupSearchTB.TextChanged += new System.EventHandler(this.GroupSearchTB_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(15, 10);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 15);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Group search:";
+            // 
             // CategoriesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.GroupSearchTB);
+            this.Controls.Add(this.NoCategoriesLbl);
             this.Controls.Add(this.SaveChangesBtn);
             this.Controls.Add(this.AddCategoryBtn);
             this.Controls.Add(this.AddCategoryGroupBtn);
@@ -154,6 +186,7 @@
             this.CategoriesGV.Size = new System.Drawing.Size(187, 389);
             this.CategoriesGV.TabIndex = 2;
             this.CategoriesGV.AutoGenerateColumns = false;
+            this.CategoriesGV.DataSourceChanged += new System.EventHandler(this.CategoriesGV_DataChanged);
             //this.CategoriesGV.SelectionChanged += new System.EventHandler(this.GroupsGV_SelectionChanged);
             // 
             // CNameColumn
@@ -194,6 +227,7 @@
             this.GroupsGV.Size = new System.Drawing.Size(187, 389);
             this.GroupsGV.TabIndex = 3;
             this.GroupsGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GroupsGV_CellClick);
+            this.GroupsGV.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GroupsGV_HeaderClick);
             this.GroupsGV.AutoGenerateColumns = false;
             //
             // GIdColumn
@@ -203,7 +237,7 @@
             this.GIdColumn.ReadOnly = true;
             this.GIdColumn.Visible = false;
             // 
-            // CNameColumn
+            // GNameColumn
             // 
             this.GNameColumn.DataPropertyName = "Name";
             this.GNameColumn.HeaderText = "Name";
@@ -212,7 +246,7 @@
             this.GNameColumn.ReadOnly = false;
             this.GNameColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // CIsActiveColumn
+            // GIsActiveColumn
             // 
             this.GIsActiveColumn.DataPropertyName = "IsActive";
             this.GIsActiveColumn.HeaderText = "Active";
@@ -237,5 +271,8 @@
         private System.Windows.Forms.Button AddCategoryGroupBtn;
         private System.Windows.Forms.Button AddCategoryBtn;
         private System.Windows.Forms.Button SaveChangesBtn;
+        private System.Windows.Forms.Label NoCategoriesLbl;
+        private System.Windows.Forms.TextBox GroupSearchTB;
+        private System.Windows.Forms.Label label1;
     }
 }

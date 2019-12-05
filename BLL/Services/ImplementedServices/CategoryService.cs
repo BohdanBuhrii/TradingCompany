@@ -126,5 +126,12 @@ namespace BLL.Services.ImplementedServices
 
             _unitOfWork.SaveChanges();
         }
+
+        public IEnumerable<CategoryGroupDTO> FilterGroups(string filter)
+        {
+            return _unitOfWork.CategoryGroupRepository
+                .Get(g => g.Name.ToLower().Contains(filter.Trim().ToLower()))
+                .Select(g => _mapper.Map<CategoryGroupDTO>(g));
+        }
     }
 }

@@ -36,7 +36,7 @@ namespace TradingCompanyForms.CategoryManager
 
         private void NameTB_TextChanged(object sender, EventArgs e)
         {
-            if (_categoryService.CategoryExist(NameTB.Text))
+            if (_categoryService.CategoryGroupExist(NameTB.Text))
             {
                 SaveBtn.Enabled = false;
                 AlertLable.Visible = true;
