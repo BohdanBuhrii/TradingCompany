@@ -133,5 +133,12 @@ namespace BLL.Services.ImplementedServices
                 .Get(g => g.Name.ToLower().Contains(filter.Trim().ToLower()))
                 .Select(g => _mapper.Map<CategoryGroupDTO>(g));
         }
+
+        public IEnumerable<CategoryDTO> FilterCategories(string filter)
+        {
+            return _unitOfWork.CategoryRepository
+                .Get(c => c.Name.ToLower().Contains(filter.Trim().ToLower()))
+                .Select(c => _mapper.Map<CategoryDTO>(c));
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BLL.Services.Interfaces;
 using DTO;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -8,44 +9,77 @@ namespace TradingCompanyWPF.CategoryManager
 {
     public class CategoryListViewModel : INotifyPropertyChanged
     {
-        private readonly ICategoryService _categoryService;
-        private CategoryDTO selectedCategory;
-
         public event PropertyChangedEventHandler PropertyChanged;
-        public ObservableCollection<CategoryDTO> Categories;
+        private readonly ICategoryService _categoryService;
+        
 
-        public CategoryListViewModel(ICategoryService categoryService)
-        {
-            _categoryService = categoryService;
-            Categories = new ObservableCollection<CategoryDTO>(_categoryService.GetAllCategories());            
-        }
+        public ObservableCollection<CategoryDTO> Categories { get; set; }
+        public IList<CategoryGroupDTO> CategoryGroups { get; private set; }
+
+        private CategoryDTO _selectedCategory;
 
         public CategoryDTO SelectedCategory
         {
-            get { return selectedCategory ; }
+            get { return _selectedCategory; }
             set
             {
-                selectedCategory = value;
+                _selectedCategory = value;
                 OnPropertyChanged("SelectedCategory");
             }
         }
 
+        public CategoryListViewModel(ICategoryService categoryService)
+        {
+            _categoryService = categoryService;
+            CategoryGroups = _categoryService.GetAllCategoryGroups();
+            Filter();
+        }
+
         public string Name
         {
-            get { return selectedCategory.Name; }
+            get { return _selectedCategory.Name; }
             set
             {
-                selectedCategory.Name = value;
+                _selectedCategory.Name = value;
                 OnPropertyChanged("Name");
             }
         }
 
+        public bool? IsActive
+        {
+            get { return _selectedCategory.IsActive; }
+            set
+            {
+                _selectedCategory.IsActive = value;
+                OnPropertyChanged("IsActive");
+            }
+        }
 
+        public string CategoryGroupName
+        {
+            get { return _selectedCategory.CategoryGroup.Name; }
+            set
+            {
+                _selectedCategory.CategoryGroup.Name = value;
+                OnPropertyChanged("CategoryGroup.Name");
+            }
+        }
 
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+
+        public void Filter(string filter = "")
+        {
+            Categories = new ObservableCollection<CategoryDTO>(_categoryService.FilterCategories(filter));
+        }
+
+        public void Refresh()
+        {
+            CategoryGroups = _categoryService.GetAllCategoryGroups();
+            Categories = new ObservableCollection<CategoryDTO>(_categoryService.GetAllCategories());
         }
     }
 }

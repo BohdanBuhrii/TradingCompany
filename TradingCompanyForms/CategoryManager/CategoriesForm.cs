@@ -15,7 +15,6 @@ namespace TradingCompanyForms.CategoryManager
         private SortOrder CategoriesSortOrder = SortOrder.None;
         private SortOrder GroupsSortOrder = SortOrder.None;
 
-
         public CategoriesForm(UserDTO user)
         {
             _user = user;
