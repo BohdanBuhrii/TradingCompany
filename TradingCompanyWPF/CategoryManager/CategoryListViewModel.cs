@@ -1,6 +1,5 @@
 ﻿using BLL.Services.Interfaces;
 using DTO;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using BLL.Extentions;
@@ -10,14 +9,20 @@ namespace TradingCompanyWPF.CategoryManager
 {
     public class CategoryListViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
         private readonly ICategoryService _categoryService;
-        
+        private CategoryDTO _selectedCategory;
 
+        public event PropertyChangedEventHandler PropertyChanged;
         public ObservableCollection<CategoryDTO> Categories { get; set; }
         public ObservableCollection<CategoryGroupDTO> CategoryGroups { get; private set; }
 
-        private CategoryDTO _selectedCategory;
+        public CategoryListViewModel(ICategoryService categoryService)
+        {
+            _categoryService = categoryService;
+            Categories = new ObservableCollection<CategoryDTO>(_categoryService.GetAllCategories());
+            CategoryGroups = new ObservableCollection<CategoryGroupDTO>(_categoryService.GetAllCategoryGroups());
+            _selectedCategory = Categories[0];
+        }
 
         public CategoryDTO SelectedCategory
         {
@@ -29,16 +34,9 @@ namespace TradingCompanyWPF.CategoryManager
             }
         }
 
-        public CategoryListViewModel(ICategoryService categoryService)
-        {
-            _categoryService = categoryService;
-            Categories = new ObservableCollection<CategoryDTO>(_categoryService.GetAllCategories());
-            CategoryGroups = new ObservableCollection<CategoryGroupDTO>(_categoryService.GetAllCategoryGroups());
-        }
-
         public string Name
         {
-            get { return _selectedCategory.Name; }
+            get { return _selectedCategory?.Name; }
             set
             {
                 _selectedCategory.Name = value;
@@ -48,7 +46,7 @@ namespace TradingCompanyWPF.CategoryManager
 
         public bool? IsActive
         {
-            get { return _selectedCategory.IsActive; }
+            get { return _selectedCategory?.IsActive; }
             set
             {
                 _selectedCategory.IsActive = value;
@@ -56,13 +54,13 @@ namespace TradingCompanyWPF.CategoryManager
             }
         }
 
-        public string CategoryGroupName
+        public CategoryGroupDTO CategoryGroup
         {
-            get { return _selectedCategory.CategoryGroup.Name; }
+            get { return _selectedCategory?.CategoryGroup; }
             set
             {
-                _selectedCategory.CategoryGroup.Name = value;
-                OnPropertyChanged("CategoryGroup.Name");
+                _selectedCategory.CategoryGroup = value;
+                OnPropertyChanged("SelectedCategoryGroup");
             }
         }
 

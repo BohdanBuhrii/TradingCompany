@@ -1,6 +1,7 @@
 ﻿using BLL.Services.Interfaces;
 using DTO;
 using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -38,24 +39,7 @@ namespace TradingCompanyWPF.CategoryManager
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            if (CategoriesDG.SelectedItems.Count > 0)
-            {
-                CategoryDTO user = new CategoryDTO();
-                var dialog = MessageBox.Show("Are you sure?", "Update", MessageBoxButton.YesNo);
-
-                if (dialog == MessageBoxResult.Yes)
-                {
-                    throw new NotImplementedException();/*
-                    user = _viewModel.SelectedCategory;
-                    user.FirstName = NameTB.Text;
-                    _categoryService.Update(user);*/
-                }
-                CategoriesDG.Items.Refresh();
-            }
-            else
-            {
-                MessageBox.Show("Choose user");
-            }
+            _categoryService.UpdateCategories(_viewModel.Categories);
         }
 
         private void FilterTB_TextChanged(object sender, TextChangedEventArgs e)
@@ -65,10 +49,18 @@ namespace TradingCompanyWPF.CategoryManager
 
         private void AddCategoryBtn_Click(object sender, RoutedEventArgs e)
         {
+            var window = new AddCategoryWindow();
+            window.Closing += Refresh;
 
+            window.Show();
         }
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            _viewModel.Refresh();
+        }
+
+        private void Refresh(object sender, CancelEventArgs e)
         {
             _viewModel.Refresh();
         }

@@ -1,6 +1,6 @@
 ﻿using BLL;
 using System.Windows;
-using TradingCompanyWPF.CategoryManager;
+using TradingCompanyWPF.Shared;
 
 namespace TradingCompanyWPF
 {
@@ -11,7 +11,7 @@ namespace TradingCompanyWPF
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            var mainWindow = DependencyInjectorBLL.Resolve<CategoryListWindow>();
+            var mainWindow = DependencyInjectorBLL.Resolve<AuthenticationWindow>();
             mainWindow.Show();
         }
     }
