@@ -61,7 +61,6 @@ namespace TradingCompanyWPF.CategoryManager
         private void FilterTB_TextChanged(object sender, TextChangedEventArgs e)
         {
             _viewModel.Filter(FilterTB.Text);
-            //CollectionViewSource.GetDefaultView(CategoriesDG.ItemsSource).Refresh();
         }
 
         private void AddCategoryBtn_Click(object sender, RoutedEventArgs e)
@@ -72,7 +71,6 @@ namespace TradingCompanyWPF.CategoryManager
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
             _viewModel.Refresh();
-            //CollectionViewSource.GetDefaultView(CategoriesDG.ItemsSource).Refresh();
         }
     }
 

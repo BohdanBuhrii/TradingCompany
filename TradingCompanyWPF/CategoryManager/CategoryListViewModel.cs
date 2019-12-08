@@ -3,6 +3,7 @@ using DTO;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using BLL.Extentions;
 using System.Runtime.CompilerServices;
 
 namespace TradingCompanyWPF.CategoryManager
@@ -14,7 +15,7 @@ namespace TradingCompanyWPF.CategoryManager
         
 
         public ObservableCollection<CategoryDTO> Categories { get; set; }
-        public IList<CategoryGroupDTO> CategoryGroups { get; private set; }
+        public ObservableCollection<CategoryGroupDTO> CategoryGroups { get; private set; }
 
         private CategoryDTO _selectedCategory;
 
@@ -31,8 +32,8 @@ namespace TradingCompanyWPF.CategoryManager
         public CategoryListViewModel(ICategoryService categoryService)
         {
             _categoryService = categoryService;
-            CategoryGroups = _categoryService.GetAllCategoryGroups();
-            Filter();
+            Categories = new ObservableCollection<CategoryDTO>(_categoryService.GetAllCategories());
+            CategoryGroups = new ObservableCollection<CategoryGroupDTO>(_categoryService.GetAllCategoryGroups());
         }
 
         public string Name
@@ -73,13 +74,13 @@ namespace TradingCompanyWPF.CategoryManager
 
         public void Filter(string filter = "")
         {
-            Categories = new ObservableCollection<CategoryDTO>(_categoryService.FilterCategories(filter));
+            Categories.UseNewSource(_categoryService.FilterCategories(filter));
         }
 
         public void Refresh()
         {
-            CategoryGroups = _categoryService.GetAllCategoryGroups();
-            Categories = new ObservableCollection<CategoryDTO>(_categoryService.GetAllCategories());
+            Categories.UseNewSource(_categoryService.GetAllCategories());
+            CategoryGroups.UseNewSource(_categoryService.GetAllCategoryGroups());
         }
     }
 }
